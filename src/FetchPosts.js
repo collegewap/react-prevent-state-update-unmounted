@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const Posts = () => {
+const FetchPosts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const controller = new AbortController();
@@ -35,3 +35,5 @@ export const Posts = () => {
     </ul>
   );
 };
+
+export default FetchPosts;
