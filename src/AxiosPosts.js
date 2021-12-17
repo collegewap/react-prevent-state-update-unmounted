@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 export const AxiosPosts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    let cancelToken;
+    const controller = new AbortController();
+    const signal = controller.signal;
 
     const fetchData = async () => {
-      cancelToken = axios.CancelToken.source();
       try {
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/posts",
-          { cancelToken: cancelToken.token }
+          {
+            signal: signal,
+          }
         );
         console.log("received response");
         const data = response.data;
@@ -24,7 +26,7 @@ export const AxiosPosts = () => {
     fetchData();
 
     return () => {
-      cancelToken.cancel("Operation canceled.");
+      controller.abort();
     };
   }, []);
   return (

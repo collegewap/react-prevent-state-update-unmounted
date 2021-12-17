@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 const CountDown = () => {
   const [remaining, setRemaining] = useState(10);
   // reference used so that it does not change across renders
-  let interval = useRef(null);
+  let intervalID = useRef(null);
   useEffect(() => {
-    if (!interval.current) {
-      interval.current = setInterval(() => {
+    if (!intervalID.current) {
+      intervalID.current = setInterval(() => {
         console.log("interval");
         setRemaining((existingValue) =>
           existingValue > 0 ? existingValue - 1 : existingValue
@@ -14,7 +14,7 @@ const CountDown = () => {
       }, 1000);
     }
     return () => {
-      clearInterval(interval.current);
+      clearInterval(intervalID.current);
     };
   }, []);
   return <div>Time Left: {remaining}s</div>;

@@ -14,7 +14,7 @@ const Box = () => {
     };
     document.addEventListener("click", checkIfClickedOutside);
     return () => {
-      //   document.removeEventListener(checkIfClickedOutside);
+      document.removeEventListener(checkIfClickedOutside);
     };
   }, []);
 
